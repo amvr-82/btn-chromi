@@ -23,7 +23,7 @@ export default function ChromeCamButton() {
   };
 
   return (
-    <div className="relative w-[260px] h-[80px]">
+    <div className="relative w-[260px] h-[80px] bg-[#55555]">
       <video
         ref={videoRef}
         autoPlay
@@ -37,26 +37,29 @@ export default function ChromeCamButton() {
       >
         Chrome Button
         {steam && (
-          <span className="absolute inset-0 rounded-2xl bg-white/30 pointer-events-none animate-steam z-20" />
+          <div className="absolute inset-0 rounded-full bg-white/30 pointer-events-none animate-steam z-20 h-[5px] w-[5px] shadow-[]"></div>
         )}
       </button>
       <style jsx>{`
         @keyframes steam {
           0% {
             opacity: 0;
-            transform: translateY(0) scale(0.9);
+            transform: translateY(0) scale(0.2);
+            transform: translateX(0) scale(0.2);
           }
-          10% {
-            opacity: 0.6;
-            transform: translateY(-10px) scale(1);
+          30% {
+            opacity: 0.3;
+            transform: scale(0.25);
+            transform: scale(0.25);
           }
           100% {
             opacity: 0;
-            transform: translateY(-50px) scale(1.2);
+            transform: translateY(-50px) scale(0.3);
+            transform: scale(0.3);
           }
         }
         .animate-steam {
-          animation: steam 15s forwards;
+          animation: steam 1.2s forwards;
         }
       `}</style>
     </div>
