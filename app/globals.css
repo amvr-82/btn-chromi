@@ -1,46 +1,53 @@
 @import "tailwindcss";
-/* دکمه */
-.steam-button {
-  position: relative;
-  width: 300px;
-  height: 80px;
-  overflow: hidden;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  cursor: pointer;
+.chrome-btn {
+  backdrop-filter: blur(18px) saturate(160%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(180, 180, 180, 0.05)
+  );
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.35),
+    0 8px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* بخار */
-.steam-long {
-  width: 40px;
-  height: 40px;
-  margin-left: -20px;
-  margin-top: -20px;
-  border-radius: 9999px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  filter: blur(6px);
-  animation: steamLoop 15s ease-in-out infinite;
-  pointer-events: none;
+.chrome-btn::before {
+  content: "";
   position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  opacity: 0.4;
 }
 
-/* انیمیشن بخار */
-@keyframes steamLoop {
+.steam-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: steam-fade 15s forwards;
+  pointer-events: none;
+}
+
+@keyframes steam-fade {
   0% {
-    transform: translate(0, 0) scale(0.4);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(0, -30px) scale(1.8);
     opacity: 0;
+    transform: scale(0.9);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
   }
   100% {
-    transform: translate(0, 0) scale(0.4);
-    opacity: 0.6;
+    opacity: 0;
+    transform: scale(1.2);
   }
 }
