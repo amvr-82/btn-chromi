@@ -1,71 +1,88 @@
-// app/btn/ChromeCamButton.tsx
-"use client"; // حتماً اینجا
+"use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+
+type Steam = {
+  id: number;
+  x: number;
+  y: number;
+};
 
 export default function ChromeCamButton() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [steam, setSteam] = useState(false);
+  const [steams, setSteams] = useState<Steam[]>([]);
 
-  // useEffect(() => {
-  //   if (!navigator.mediaDevices) return;
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true })
-  //     .then((stream) => {
-  //       if (videoRef.current) videoRef.current.srcObject = stream;
-  //     })
-  //     .catch(console.error);
-  // }, []);
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.src = "https://www.insecam.org/en/view/123456/"; // فقط نمونه
-      videoRef.current.play();
-    }
-  }, []);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
 
-  const handleClick = () => {
-    setSteam(true);
-    setTimeout(() => setSteam(false), 15000);
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const newSteam: Steam = {
+      id: Date.now(),
+      x,
+      y,
+    };
+
+    setSteams((prev) => [...prev, newSteam]);
+
+    // حذف بخار بعد از انیمیشن
+    setTimeout(() => {
+      setSteams((prev) => prev.filter((s) => s.id !== newSteam.id));
+    }, 9000);
   };
 
   return (
-    <div className="relative w-[260px] h-[80px] bg-[#55555]">
+    <div className="relative w-[260px] h-[80px]">
       <video
-        ref={videoRef}
+        src="./2_5415763304226247236.mp4"
         autoPlay
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover rounded-2xl blur-xl scale-110 z-0"
+        className="absolute inset-0 w-full h-full object-fill rounded-2xl blur-[2px] scale-95 z-0 threeD"
       />
+
       <button
         onClick={handleClick}
-        className="relative w-full h-full rounded-2xl overflow-hidden z-10 bg-white/10 backdrop-blur-lg border border-white/30"
+        className="relative w-full h-full rounded-[25px] overflow-hidden z-10
+        bg-white/10 backdrop-blur-[0px] border border-white/30 shadow-inner  shadow-[0_4px_6px_#ffffff70] text-[24px] font-extrabold text-[#424242]"
       >
         Chrome Button
-        {steam && (
-          <span className="absolute inset-0 rounded-2xl bg-white/30 pointer-events-none animate-steam z-20" />
-        )}
+        {steams.map((steam) => (
+          <span
+            key={steam.id}
+            className="absolute pointer-events-none animate-steam z-20 backdrop-blur-"
+            style={{
+              left: steam.x,
+              top: steam.y,
+              width: 150,
+              height: 150,
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        ))}
       </button>
-      <style jsx>{`
+
+      <style>{`
         @keyframes steam {
           0% {
             opacity: 0;
-            transform: translateY(0) scale(0.2);
-            transform: translateX(0) scale(0.2);
+            transform: translate(-50%, -50%) scale(0.2);
           }
           30% {
-            opacity: 0.3;
-            transform: scale(0.25);
-            transform: scale(0.25);
+            opacity: 0.4;
           }
           100% {
             opacity: 0;
-            transform: translateY(-50px) scale(0.3);
-            transform: scale(0.3);
+            transform: translate(-50%, -50%) scale(0.3);
           }
         }
         .animate-steam {
-          animation: steam 20s forwards;
+          background: radial-gradient(circle, rgba(150, 150, 150,0.9), transparent);
+          border-radius: 50%;
+          animation: steam 6s ease-out forwards;
+            z-index: 9999;
+            // clip-path: polygon(0% 10%, 100% 0%, 100% 90%, 0% 100%);
+
         }
       `}</style>
     </div>
