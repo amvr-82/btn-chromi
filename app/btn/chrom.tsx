@@ -37,7 +37,7 @@ export default function ChromeCamButton() {
       >
         Chrome Button
         {steam && (
-          <div className="absolute inset-0 rounded-full bg-white/30 pointer-events-none animate-steam z-20 h-[5px] w-[5px] shadow-[]"></div>
+          <span className="absolute inset-0 rounded-2xl bg-white/30 pointer-events-none animate-steam z-20" />
         )}
       </button>
       <style jsx>{`
@@ -59,7 +59,7 @@ export default function ChromeCamButton() {
           }
         }
         .animate-steam {
-          animation: steam 1.2s forwards;
+          animation: steam 20s forwards;
         }
       `}</style>
     </div>
