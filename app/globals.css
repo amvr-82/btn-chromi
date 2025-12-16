@@ -1,26 +1,46 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* دکمه */
+.steam-button {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* بخار */
+.steam-long {
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  filter: blur(6px);
+  animation: steamLoop 15s ease-in-out infinite;
+  pointer-events: none;
+  position: absolute;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* انیمیشن بخار */
+@keyframes steamLoop {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0.6;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  50% {
+    transform: translate(0, -30px) scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0.6;
+  }
 }
