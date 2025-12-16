@@ -7,14 +7,20 @@ export default function ChromeCamButton() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [steam, setSteam] = useState(false);
 
+  // useEffect(() => {
+  //   if (!navigator.mediaDevices) return;
+  //   navigator.mediaDevices
+  //     .getUserMedia({ video: true })
+  //     .then((stream) => {
+  //       if (videoRef.current) videoRef.current.srcObject = stream;
+  //     })
+  //     .catch(console.error);
+  // }, []);
   useEffect(() => {
-    if (!navigator.mediaDevices) return;
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then((stream) => {
-        if (videoRef.current) videoRef.current.srcObject = stream;
-      })
-      .catch(console.error);
+    if (videoRef.current) {
+      videoRef.current.src = "https://www.insecam.org/en/view/123456/"; // فقط نمونه
+      videoRef.current.play();
+    }
   }, []);
 
   const handleClick = () => {
