@@ -1,5 +1,7 @@
+"use client";
 // app/page.tsx
 import React from "react";
+import ChromeCamButton from "./btn/chrom";
 
 export default function HomePage() {
   return (
@@ -10,9 +12,7 @@ export default function HomePage() {
       <p className="text-lg text-gray-700 mb-6">
         این یه صفحه ساده با Tailwind CSS و Next.js هست.
       </p>
-      <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition">
-        کلیک کن
-      </button>
+      <ChromeCamButton></ChromeCamButton>
     </main>
   );
 }
