@@ -51,7 +51,7 @@ export default function ChromeCamButton() {
         autoPlay
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-fill rounded-2xl blur-[3px] scale-95 z-0"
+        className="brightness-70 absolute inset-0 w-full h-full object-fill rounded-2xl blur-[3px] scale-95 z-0 hover:shadow-2xl"
       />
 
       <button
@@ -59,7 +59,7 @@ export default function ChromeCamButton() {
         className="relative w-full h-full rounded-[25px] overflow-hidden z-10
         bg-white/10 backdrop-blur-[2px] border border-white/30
         shadow-inner shadow-[0_4px_6px_#ffffff70]
-        text-[24px] font-extrabold text-[#424242]"
+        text-[24px] font-extrabold text-[#ffffff] hover:shadow-[2px-2px-3px- rgba(180, 180, 180, 0.05)]"
       >
         Chrome Button
         {steams.map((steam) => (
@@ -84,7 +84,7 @@ export default function ChromeCamButton() {
             transform: translate(-50%, -50%) scale(0.2);
           }
           30% {
-            opacity: 0.45;
+            opacity: 0.8;
           }
           100% {
             opacity: 0;
@@ -96,10 +96,10 @@ export default function ChromeCamButton() {
           background: radial-gradient(
             circle,
             rgba(220,220,220,0.8),
-            rgba(200,200,200,0.4),
+            rgba(180,180,180,0.4),
             transparent
           );
-          filter: blur(6px);
+          filter: blur(20px);
           border-radius: 50%;
           animation: steam 6s ease-out forwards;
         }
